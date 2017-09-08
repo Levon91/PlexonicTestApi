@@ -6,12 +6,25 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring/applicationContext.xml</param-value>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+    <context-param>
+        <description>struts tiles</description>
+        <param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
+        <param-value>
+            /WEB-INF/tiles.xml
+        </param-value>
     </context-param>
 
     <!-- spring context listener -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!--Tiles listener-->
+    <listener>
+        <listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class>
     </listener>
 
     <!-- rest service listener -->
@@ -39,5 +52,40 @@
         <servlet-name>JerseySpringServlet</servlet-name>
         <url-pattern>/service/*</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>WebFilter</filter-name>
+        <filter-class>am.plexonic.web.util.filter.WebFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>WebFilter</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+
+    <!-- Error handling-->
+    <error-page>
+        <!-- Missing login -->
+        <error-code>401</error-code>
+        <location>/WEB-INF/pages/error/error_code.jsp</location>
+    </error-page>
+    <error-page>
+        <!-- Forbidden directory listing -->
+        <error-code>403</error-code>
+        <location>/WEB-INF/pages/error/error_code.jsp</location>
+    </error-page>
+    <!-- Missing resource -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/pages/error/error_code.jsp</location>
+    </error-page>
+    <error-page>
+        <!-- Uncaught exception -->
+        <error-code>500</error-code>
+        <location>/WEB-INF/pages/error/error_code.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/WEB-INF/pages/error/error_code.jsp</location>
+    </error-page>
 
 </web-app>

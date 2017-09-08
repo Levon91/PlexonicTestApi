@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+
+    <constant name="struts.configuration.xml.reload" value="true"/>
+
+    <constant name="struts.action.extension" value="action"/>
+
+    <constant name="struts.serve.static.browserCache" value="false"/>
+
+    <constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+
+    <constant name="struts.multipart.maxSize" value="20971520"/>
+
+    <constant name="struts.url.http.port" value="8084"/>
+
+    <constant name="struts.devMode" value="true"/>
+
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+
+    <!-- General -->
+    <include file="struts/extension/general-extension.xml"/>
+    <include file="struts/general.xml"/>
+</struts>
