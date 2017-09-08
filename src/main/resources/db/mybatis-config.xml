@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//www.mybatis.org//DTD Config 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="DAU" type="am.plexonic.core.manager.model.DAU"/>
+    </typeAliases>
+
+    <typeHandlers>
+        <typeHandler handler="am.plexonic.core.manager.dao.impl.internal.type.DayRangeTypeHandler"
+                     javaType="am.plexonic.core.manager.model.lcp.DayRange"/>
+    </typeHandlers>
+
+    <mappers>
+        <mapper resource="db/mapper/AnalyticRequestMapper.xml"/>
+    </mappers>
+
+</configuration>

@@ -6,4 +6,10 @@
 
     <context:component-scan base-package="am.plexonic.web.action"/>
 
+    <import resource="db-config.xml"/>
+
+    <import resource="dataaccess.xml"/>
+
+    <import resource="businesslayer.xml"/>
+
 </beans>
