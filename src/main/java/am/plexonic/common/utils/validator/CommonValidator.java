@@ -25,10 +25,6 @@ public final class CommonValidator {
         return StringUtils.isEmpty(str);
     }
 
-    public static boolean isEmpty(String[] array) {
-        return ArrayUtils.isEmpty(array);
-    }
-
     public static boolean isValidDate(String strDate) {
         try {
             DATE_FORMAT.parse(strDate);
@@ -38,25 +34,4 @@ public final class CommonValidator {
             return false;
         }
     }
-
-    /**
-     * Checks if the given date is before now
-     *
-     * @param strDate date in string format
-     * @return true if given date is after now, false otherwise
-     */
-    public static boolean isDateBeforeNow(String strDate) {
-        try {
-            Date date = DATE_TIME_FORMAT.parse(strDate);
-            return date.before(new Date());
-        } catch (Exception e) {
-            System.err.println("Exception was thrown when validating the date string (" + strDate + ")");
-            return false;
-        }
-    }
-
-    public static boolean isDateBeforeNow(long dateTime) {
-        return dateTime < System.currentTimeMillis();
-    }
-
 }

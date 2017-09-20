@@ -64,11 +64,6 @@
 
     <!-- Error handling-->
     <error-page>
-        <!-- Missing login -->
-        <error-code>401</error-code>
-        <location>/WEB-INF/pages/error/error_code.jsp</location>
-    </error-page>
-    <error-page>
         <!-- Forbidden directory listing -->
         <error-code>403</error-code>
         <location>/WEB-INF/pages/error/error_code.jsp</location>

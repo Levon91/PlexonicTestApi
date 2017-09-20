@@ -19,12 +19,9 @@ public class ErrorRedirectionAction extends BaseAction {
 
         if (statusCode != null) {
             switch (statusCode) {
-                case 401:
                 case 403:
                 case 404:
                 case 500:
-                case 503:
-
             }
         } else {
             statusCode = 500;

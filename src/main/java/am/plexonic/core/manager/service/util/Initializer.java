@@ -24,9 +24,4 @@ public final class Initializer {
             e.printStackTrace();
         }
     }
-
-    @PreDestroy
-    public void contextDestroyed() {
-        // to be implemented later if it will be required
-    }
 }
