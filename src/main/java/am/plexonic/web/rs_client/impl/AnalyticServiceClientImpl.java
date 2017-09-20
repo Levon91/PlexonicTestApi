@@ -2,7 +2,7 @@ package am.plexonic.web.rs_client.impl;
 
 import am.plexonic.common.dto.dau.DAUListResponseDto;
 import am.plexonic.common.rs_utils.ServerPathProvider;
-import am.plexonic.common.rs_utils.WSClientUtils;
+import am.plexonic.core.manager.model.lcp.DayRange;
 import am.plexonic.web.rs_client.IAnalyticServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -48,7 +48,34 @@ public final class AnalyticServiceClientImpl extends BaseServiceClient implement
             Response response = client.target(url)
                     .request()
                     .accept(MediaType.APPLICATION_JSON)
-                    .post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));;
+                    .post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
+
+            if (response.getStatus() != Response.Status.OK.getStatusCode()) {
+                throw getExceptionBy(response.getStatus(), "Failed to get DAU");
+            }
+
+            return response.readEntity(DAUListResponseDto.class);
+        } catch (ProcessingException e) {
+            System.out.println("Exception was thrown when getting DAU:");
+            throw getServerUnavailableException(url, e);
+        }
+    }
+
+    @Override
+    public DAUListResponseDto getDAUByRetention(Long dateFrom, DayRange retention) throws Exception {
+
+        String url = serverUrl + ServerPathProvider.TEST_API.getPath() + ServerPathProvider.DAU_BY_RETENTION.getPath();
+        try {
+
+            Form form = new Form();
+            form.param("date_from", String.valueOf(dateFrom));
+            form.param("retention", String.valueOf(retention));
+
+            // gets response object to check its status
+            Response response = client.target(url)
+                    .request()
+                    .accept(MediaType.APPLICATION_JSON)
+                    .post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
 
             if (response.getStatus() != Response.Status.OK.getStatusCode()) {
                 throw getExceptionBy(response.getStatus(), "Failed to get DAU");

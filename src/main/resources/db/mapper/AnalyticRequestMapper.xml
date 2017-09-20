@@ -17,4 +17,11 @@
                 #{date}
             </foreach>
     </select>
+
+    <select id="getDAUByRetention" parameterType="Map" resultMap="dauSimpleMap">
+        SELECT user_id
+            FROM `requests`
+            WHERE request_date
+            BETWEEN #{dateFrom} AND #{dateTo}
+    </select>
 </mapper>

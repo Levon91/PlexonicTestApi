@@ -6,6 +6,7 @@ import am.plexonic.common.dto.general.ResponseStatus;
 import am.plexonic.common.exception.InternalErrorException;
 import am.plexonic.common.rs_utils.PathConstants;
 import am.plexonic.core.manager.businesslayer.IAnalyticManager;
+import am.plexonic.core.manager.model.lcp.DayRange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +41,22 @@ public class AnalyticService {
         DAUListResponseDto response = new DAUListResponseDto();
         try {
             response = analyticManager.getDAU(dateList);
+        } catch (InternalErrorException ex) {
+            response.setStatus(ResponseStatus.INTERNAL_ERROR);
+            String message = "Exception was thrown when getting DAU list";
+            response.setMessage(message);
+        }
+        return response;
+    }
+
+    @POST
+    @Path(PathConstants.DAU_BY_RETENTION)
+    public DAUListResponseDto getDAU(@FormParam("date_from") Long dateFrom,
+                                     @FormParam("retention") Long retention) {
+
+        DAUListResponseDto response = new DAUListResponseDto();
+        try {
+            response = analyticManager.getDAUByRetention(dateFrom, retention);
         } catch (InternalErrorException ex) {
             response.setStatus(ResponseStatus.INTERNAL_ERROR);
             String message = "Exception was thrown when getting DAU list";
