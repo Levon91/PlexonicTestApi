@@ -3,21 +3,13 @@ package am.plexonic.common.rs_utils;
 import am.plexonic.common.rs_utils.exception.ServerUnavailableException;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.jackson.JacksonFeature;
-import org.glassfish.jersey.uri.UriComponent;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.Form;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.MessageFormat;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Ws client utilities.
