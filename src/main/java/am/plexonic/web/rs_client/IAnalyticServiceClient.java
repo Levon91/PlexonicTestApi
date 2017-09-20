@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface IAnalyticServiceClient {
 
-    DAUListResponseDto getDAU(List<Long> dates) throws Exception;
+    DAUListResponseDto getDAU(List<Long> dates, int offset, int limit) throws Exception;
 
-    DAUListResponseDto getDAUByRetention(Long dateFrom, DayRange retention) throws Exception;
+    DAUListResponseDto getDAUByRetention(Long dateFrom, DayRange retention, int offset, int limit) throws Exception;
 }

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface IAnalyticDao {
 
-    List<DAU> getDAU(List<Date> dates) throws DatabaseException;
+    List<DAU> getDAU(List<Date> dates, int offset, int limit) throws DatabaseException;
 
-    List<DAU> getDAUByRetention(Date dateFrom, Date dateTo) throws DatabaseException;
+    List<DAU> getDAUByRetention(Date dateFrom, Date dateTo, int offset, int limit) throws DatabaseException;
 }

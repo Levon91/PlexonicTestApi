@@ -35,13 +35,15 @@ public final class AnalyticServiceClientImpl extends BaseServiceClient implement
     }
 
     @Override
-    public DAUListResponseDto getDAU(List<Long> dates) throws Exception {
+    public DAUListResponseDto getDAU(List<Long> dates, int offset, int limit) throws Exception {
         String url = serverUrl + ServerPathProvider.TEST_API.getPath() + ServerPathProvider.DAU.getPath();
         try {
 
             Form form = new Form();
             for (Long date : dates) {
                 form.param("dates", String.valueOf(date));
+                form.param("offset", String.valueOf(offset));
+                form.param("limit", String.valueOf(limit));
             }
 
             // gets response object to check its status
@@ -62,7 +64,7 @@ public final class AnalyticServiceClientImpl extends BaseServiceClient implement
     }
 
     @Override
-    public DAUListResponseDto getDAUByRetention(Long dateFrom, DayRange retention) throws Exception {
+    public DAUListResponseDto getDAUByRetention(Long dateFrom, DayRange retention, int offset, int limit) throws Exception {
 
         String url = serverUrl + ServerPathProvider.TEST_API.getPath() + ServerPathProvider.DAU_BY_RETENTION.getPath();
         try {
@@ -70,6 +72,8 @@ public final class AnalyticServiceClientImpl extends BaseServiceClient implement
             Form form = new Form();
             form.param("date_from", String.valueOf(dateFrom));
             form.param("retention", String.valueOf(retention));
+            form.param("offset", String.valueOf(offset));
+            form.param("limit", String.valueOf(limit));
 
             // gets response object to check its status
             Response response = client.target(url)

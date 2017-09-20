@@ -33,7 +33,7 @@ public class AnalyticManagerImpl implements IAnalyticManager {
     private DAUConverter converter;
 
     @Override
-    public DAUListResponseDto getDAU(List<Long> dates) throws InternalErrorException {
+    public DAUListResponseDto getDAU(List<Long> dates, int offset, int limit) throws InternalErrorException {
 
         DAUListResponseDto response = new DAUListResponseDto();
         List<Date> dateList = new ArrayList<>();
@@ -43,7 +43,7 @@ public class AnalyticManagerImpl implements IAnalyticManager {
                 Date sqlDate = new Date(date);
                 dateList.add(sqlDate);
             }
-            List<DAU> dau = analyticDao.getDAU(dateList);
+            List<DAU> dau = analyticDao.getDAU(dateList, offset, limit);
 
             if (dau.isEmpty()) {
                 response.setStatus(ResponseStatus.NO_DATA_FOUND);
@@ -66,14 +66,14 @@ public class AnalyticManagerImpl implements IAnalyticManager {
     }
 
     @Override
-    public DAUListResponseDto getDAUByRetention(Long dateFrom, Long retention) throws InternalErrorException {
+    public DAUListResponseDto getDAUByRetention(Long dateFrom, Long retention, int offset, int limit) throws InternalErrorException {
         DAUListResponseDto response = new DAUListResponseDto();
         try {
 
             Date fromDate = new Date(dateFrom);
             Date toDate = LocalDateUtils.plusDays(fromDate, retention);
 
-            List<DAU> dau = analyticDao.getDAUByRetention(fromDate, toDate);
+            List<DAU> dau = analyticDao.getDAUByRetention(fromDate, toDate, offset, limit);
 
             if (dau.isEmpty()) {
                 response.setStatus(ResponseStatus.NO_DATA_FOUND);

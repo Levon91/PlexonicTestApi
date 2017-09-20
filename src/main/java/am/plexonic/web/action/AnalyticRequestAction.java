@@ -3,7 +3,7 @@ package am.plexonic.web.action;
 import am.plexonic.common.dto.dau.DAUListResponseDto;
 import am.plexonic.common.dto.general.ResponseStatus;
 import am.plexonic.common.rs_utils.exception.ServerUnavailableException;
-import am.plexonic.web.action.comon.BaseAction;
+import am.plexonic.web.action.comon.BasePagingAction;
 import am.plexonic.web.rs_client.IAnalyticServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -16,7 +16,7 @@ import java.util.Date;
 
 @Component
 @Scope("prototype")
-public final class AnalyticRequestAction extends BaseAction {
+public final class AnalyticRequestAction extends BasePagingAction {
 
     @Autowired
     private IAnalyticServiceClient analyticServiceClient;
@@ -27,7 +27,7 @@ public final class AnalyticRequestAction extends BaseAction {
 
     public String exec() throws Exception {
         try {
-            DAUListResponseDto response = analyticServiceClient.getDAU(Arrays.asList(dateLong));
+            DAUListResponseDto response = analyticServiceClient.getDAU(Arrays.asList(dateLong), page * ELEMENT_COUNT_PER_PAGE, ELEMENT_COUNT_PER_PAGE);
             if (response.getStatus() == ResponseStatus.SUCCESS) {
                 session.put("dau", response);
                 return SUCCESS;
@@ -37,7 +37,7 @@ public final class AnalyticRequestAction extends BaseAction {
             }
             if (response.getStatus() == ResponseStatus.NO_DATA_FOUND) {
                 addActionError(getText("Data not found"));
-            } else{
+            } else {
                 addActionError(response.getMessage());
             }
             return INPUT;
@@ -52,7 +52,7 @@ public final class AnalyticRequestAction extends BaseAction {
     @Override
     public void validate() {
         if (date == null || date.isEmpty()) {
-           addFieldError("date", "Empty date");
+            addFieldError("date", "Empty date");
         }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {

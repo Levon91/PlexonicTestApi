@@ -17,7 +17,7 @@ public interface IAnalyticManager {
      * @return DAUListResponseDto
      * @throws InternalErrorException
      */
-    DAUListResponseDto getDAU(List<Long> dates) throws InternalErrorException;
+    DAUListResponseDto getDAU(List<Long> dates, int offset, int limit) throws InternalErrorException;
 
     /**
      * Method wich returns daily active users by retention
@@ -26,5 +26,5 @@ public interface IAnalyticManager {
      * @return DAUListResponseDto
      * @throws InternalErrorException
      */
-    DAUListResponseDto getDAUByRetention(Long dateFrom, Long retention) throws InternalErrorException;
+    DAUListResponseDto getDAUByRetention(Long dateFrom, Long retention, int offset, int limit) throws InternalErrorException;
 }

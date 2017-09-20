@@ -16,6 +16,13 @@
             <foreach collection="dates" item="date" open="(" close=")" separator=",">
                 #{date}
             </foreach>
+
+        <if test="limit != null">
+            LIMIT #{limit}
+        </if>
+        <if test="offset != null">
+            OFFSET #{offset}
+        </if>
     </select>
 
     <select id="getDAUByRetention" parameterType="Map" resultMap="dauSimpleMap">
@@ -23,5 +30,12 @@
             FROM `requests`
             WHERE request_date
             BETWEEN #{dateFrom} AND #{dateTo}
+
+        <if test="limit != null">
+            LIMIT #{limit}
+        </if>
+        <if test="offset != null">
+            OFFSET #{offset}
+        </if>
     </select>
 </mapper>
