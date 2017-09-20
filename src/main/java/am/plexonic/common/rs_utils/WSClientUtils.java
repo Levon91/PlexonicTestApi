@@ -24,15 +24,6 @@ import java.util.Map;
  */
 public final class WSClientUtils {
     /**
-     * The parameter's placeholder prefix.
-     */
-    public static final char PLACEHOLDER_PREFIX = '{';
-    /**
-     * The parameter's placeholder suffix.
-     */
-    public static final char PLACEHOLDER_SUFFIX = '}';
-
-    /**
      * The private constructor.
      */
     private WSClientUtils() {
