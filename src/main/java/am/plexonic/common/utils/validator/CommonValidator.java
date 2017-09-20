@@ -59,8 +59,4 @@ public final class CommonValidator {
         return dateTime < System.currentTimeMillis();
     }
 
-    public static boolean isValidBankCode(String code) {
-        return true;
-    }
-
 }
